@@ -14,10 +14,10 @@ app.use(express.urlencoded({extended:true}))
 app.get('/', (req:Request, res:Response,next:NextFunction) => {
     // inserting a test data into mongodb
     /**
-     * Step1: Interface
-     * Step2: Schema
-     * Step3: Model
-     * Step4: Database Query
+     * Step1: Interface done
+     * Step2: Schema  done
+     * Step3: Model done
+     * Step4: Database Query on Model
      */
     
     // res.send('Hello World!')
@@ -101,6 +101,36 @@ app.get('/', (req:Request, res:Response,next:NextFunction) => {
    }
     
   });
+
+//   Create a model 
+const User = model<IUser>('User', userSchema)
+
+const createUserToDb=async()=>{
+    
+    const user = new User({
+        id: "7778",
+    role:"Student",
+    password:'jakanaka',
+    name: {
+        firstName: "Mr. X",
+        middleName:"Bappy",
+        lastName: 'Sheikh',
+    },
+    dateOfBirth: "11-08-2003",
+    gender: "male" ,
+    email : "example@gmail.com",
+    contract: "90329",
+    emergencyContactNo: '4344543',
+    presentAddress : "nowagram",
+    permanentAddress : 'kalia narail'
+
+    })
+
+    await user.save()
+console.log(user);
+}
+
+createUserToDb();
 
 })
 
